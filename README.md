@@ -1,5 +1,5 @@
 # surgemail_archive_script
-Bash script for Centos 6.5 surgemail to restore archived accounts.
+Bash script for surgemail to restore archived accounts.
 
 Wrote this sctipt to automate restoring archived emails.
 
