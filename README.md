@@ -1,4 +1,4 @@
-# surgemail_archive_script
+# Archive-Recovery-script
 Bash script for surgemail to restore archived accounts.
 
 Wrote this sctipt to automate restoring archived emails.
