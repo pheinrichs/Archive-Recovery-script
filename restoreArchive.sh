@@ -8,6 +8,9 @@ dir1=null
 userLength=null
 dirLength=null
 
+archiveDirectory="/usr/local/surgemail/archive_deleted/"
+activeDirectory="/var/surgemail/"
+
 read -p "Enter Username: " username 
 read -r -p "$username: Are you sure? [y/N] " response
 
@@ -20,10 +23,27 @@ case $response in
 
 	case $response1 in
 	[yY][eE][sS]|[yY]) 
-		#gather paths for old archive directory and active directory
-	    find=$(find /usr/local/surgemail/archive_deleted/$domain | grep -r  "$username")
-	    findNew=$(find /var/surgemail/$domain | grep -r  "$username")
 
+		read -p "Default Archive Directory[ $archiveDirectory ]? " archiveResponse 
+		if [ -z "$archiveResponse" ]
+		then
+			archiveDirectory="/usr/local/surgemail/archive_deleted/$domain"
+		else
+			archiveDirectory="$archiveResponse"
+		fi
+
+		read -p "Default Active Directory [ $activeDirectory ] ? " activeResponse
+		if [ -z "$activeResponse" ]
+		then
+			activeDirectory="/var/surgemail/$domain"
+		else
+			activeDirectory="$activeResponse"
+		fi
+
+		#gather paths for old archive directory and active directory
+	    find=$(find $archiveDirectory | grep -r  "$username")
+	    findNew=$(find $activeDirectory | grep -r  "$username")
+	    echo "$activeDirectory"
 	    #gather first response in grep, it always returns the root folder first which we need
 	    for i in $find; do
 	    	if [ $x -eq "0" ] 
